@@ -21,10 +21,8 @@ class JsonParser {
             jsonObject[" total_outstanding "]?.jsonPrimitive?.content?.toDoubleOrNull() ?: 0.0
 
         val monthlyConsumption = jsonObject
-            .filterKeys { it.matches(Regex("\\d{2}-.+")) }
-            .mapValues {
-                it.value.jsonPrimitive.content.toDoubleOrNull() ?: 0.0
-            }
+            .filterKeys { it.matches(Regex("\\d{2}-\\w+")) } // Ensure keys match pattern "dd-..."
+            .mapValues { it.value.jsonPrimitive.content.toDoubleOrNull() ?: 0.0 }
 
         return Mosque(
             accountNumber = accountNumber,
