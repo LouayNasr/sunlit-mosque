@@ -2,6 +2,7 @@ package com.example.sunlitmosques.viewmodels
 
 import JsonParser
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -41,6 +42,11 @@ class MosqueViewModel(application: Application) : AndroidViewModel(application) 
 
     fun selectMosque(mosque: Mosque) {
         _selectedMosque.value = mosque
+    }
+
+    fun performCalculation() {
+        // Add your calculation logic here
+        Log.d("MosqueViewModel", "Calculation performed")
     }
 }
 

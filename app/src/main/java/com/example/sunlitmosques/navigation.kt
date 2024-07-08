@@ -22,7 +22,7 @@ fun AppNavigation(mosqueViewModel: MosqueViewModel) {
             MosqueListScreen(navController, mosqueViewModel)
         }
         composable(Screen.MosqueDetails.route) {
-            MosqueDetailsScreen(mosqueViewModel)
+            MosqueDetailsScreen(navController, mosqueViewModel)
         }
     }
 }
