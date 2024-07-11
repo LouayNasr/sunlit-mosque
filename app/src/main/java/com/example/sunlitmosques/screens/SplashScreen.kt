@@ -12,17 +12,23 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.NavController
+import com.example.sunlitmosques.MainActivity
 import com.example.sunlitmosques.R
 import com.example.sunlitmosques.Screen
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun SplashScreen(navController: NavController) {
@@ -34,13 +40,31 @@ fun SplashScreen(navController: NavController) {
         )
     )
 
+    val context = LocalContext.current as MainActivity
+    val scope = rememberCoroutineScope()
+
     LaunchedEffect(key1 = true) {
+        // Enable full-screen mode
+        WindowCompat.setDecorFitsSystemWindows(context.window, false)
+        WindowInsetsControllerCompat(context.window, context.window.decorView).let { controller ->
+            controller.hide(android.view.WindowInsets.Type.systemBars())
+            controller.systemBarsBehavior =
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_BARS_BY_SWIPE
+        }
         startAnimation = true
         delay(3000)
         navController.navigate(Screen.MosqueList.route) {
             popUpTo(Screen.Splash.route) {
                 inclusive = true
             }
+        }
+        // Restore the default system bars behavior after navigation
+        scope.launch {
+            delay(100)  // Ensure navigation has taken place before restoring
+            WindowCompat.setDecorFitsSystemWindows(context.window, true)
+            WindowInsetsControllerCompat(context.window, context.window.decorView).show(
+                android.view.WindowInsets.Type.systemBars()
+            )
         }
     }
     AnimatedSplash(alpha = alphaAnimation.value)
