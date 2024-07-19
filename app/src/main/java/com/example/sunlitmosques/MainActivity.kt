@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.material3.MaterialTheme
+import com.example.sunlitmosques.ui.theme.SunlitMosquesTheme
 import com.example.sunlitmosques.viewmodels.MosqueViewModel
 import com.example.sunlitmosques.viewmodels.MosqueViewModelFactory
 
@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         mosqueViewModel.loadMosquesFromAssets("mosque_data.json")
 
         setContent {
-            MaterialTheme {
+            SunlitMosquesTheme {
                 AppNavigation(mosqueViewModel)
             }
         }
