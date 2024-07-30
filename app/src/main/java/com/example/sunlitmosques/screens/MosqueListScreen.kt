@@ -1,6 +1,7 @@
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -54,6 +55,7 @@ fun MosqueListScreen(navController: NavController, mosqueViewModel: MosqueViewMo
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(paddingValues),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
                     contentPadding = PaddingValues(8.dp)
                 ) {
                     items(mosqueList) { mosque ->
@@ -79,14 +81,13 @@ fun MosqueListScreen(navController: NavController, mosqueViewModel: MosqueViewMo
 fun MosqueRow(mosque: Mosque, onClick: () -> Unit) {
     Card(
         modifier = Modifier
-            .clickable(onClick = onClick)
-            .padding(4.dp),
+            .clickable(onClick = onClick),
         shape = RoundedCornerShape(4.dp),
         colors = CardDefaults.cardColors()
     ) {
         Row(
             modifier = Modifier
-                .padding(8.dp)
+                .padding(12.dp)
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
