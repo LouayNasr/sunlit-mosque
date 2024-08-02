@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.sunlitmosques"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -65,6 +65,9 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.runtime.livedata)
     implementation(libs.androidx.core.splashscreen)
+
+
+    implementation(libs.yChart)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
